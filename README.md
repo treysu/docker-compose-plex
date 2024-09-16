@@ -60,6 +60,8 @@ The `compose.yaml` file includes the following services:
 
 The `kometa.env` file should contain necessary environment variables for the Kometa service to function correctly. These will be used in the Kometa config file.
 
+You should also add a `default.env` file that contains the timezome evnironment varaible: `TZ=America/Chicago`.
+
 ## Health Check and Auto-Restart
 
 The `compose.yaml` file includes configurations for health checks and auto-restart of services. Each service will attempt to restart unless explicitly stopped.
