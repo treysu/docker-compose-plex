@@ -85,7 +85,7 @@ services:
   letterboxd_sync:
     <<: [ *general, *plexdependant ]
     container_name: letterboxd_sync
-    build: https://github.com/treysullivent/letterboxd_plex_sync.git
+    build: https://github.com/treysullivent/letterboxd-plex-sync.git
     stdin_open: true
     tty: true
     environment:
