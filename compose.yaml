@@ -17,7 +17,6 @@ x-media: &media-grp
   PUID: 1001 # media
   PGID: 1002 # mediagrp
 
-
 x-plexdependant: &plexdependant
   init: true
   depends_on:
@@ -27,7 +26,7 @@ name: plex
 
 services:
   plex:
-    <<: [ *general ]
+    <<: [*general]
     container_name: plex
     network_mode: host
     environment:
@@ -59,7 +58,7 @@ services:
       - homepage.description=Plex server
 
   kometa:
-    <<: [ *general, *plexdependant ]
+    <<: [*general, *plexdependant]
     container_name: kometa
     environment:
       <<: *media-grp
@@ -76,7 +75,7 @@ services:
         required: true
 
   plex-image-cleanup:
-    <<: [ *general, *plexdependant ]
+    <<: [*general, *plexdependant]
     image: meisnate12/plex-image-cleanup
     container_name: plex-image-cleanup
     environment:
@@ -87,7 +86,7 @@ services:
       - "~/Docker/container-data/plex/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
 
   letterboxd_sync:
-    <<: [ *general, *plexdependant ]
+    <<: [*general, *plexdependant]
     container_name: letterboxd_sync
     build: https://github.com/treysullivent/letterboxd-plex-sync.git
     stdin_open: true
@@ -102,5 +101,5 @@ services:
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ~/Docker/container-data/plex/lb_sync/config:/root/.config/letterboxd_stats:ro # directory containing config.toml 
-      - ~/Docker/container-data/plex/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file. 
+      - ~/Docker/container-data/plex/lb_sync/config:/root/.config/letterboxd_stats:ro # directory containing config.toml
+      - ~/Docker/container-data/plex/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file.
