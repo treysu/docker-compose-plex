@@ -1,0 +1,17 @@
+# Ignore everything by default
+*
+
+
+
+
+# Allow standard Git files
+!.gitignore
+!.gitmodules
+!README.md
+
+# Allow compose.yaml files in any directory
+!compose.yaml
+
+# Allow files ending with .example in any directory
+!*.example
+
