@@ -62,7 +62,7 @@ services:
     container_name: kometa
     environment:
       <<: *media-grp
-      #KOMETA_RUN: True
+      KOMETA_RUN: True
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
