@@ -47,8 +47,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ~/Docker/container-data/plex/plexmediaserver:/config
-      - /media/library1/MediaLibrary1:/library1:ro
-      - /media/library2/MediaLibrary2:/library2:ro
+      - /mnt/MediaLibrary1:/library1:ro
+      - /mnt/MediaLibrary2:/library2:ro
     image: lscr.io/linuxserver/plex:latest
     labels:
       - homepage.group=Media
