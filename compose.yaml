@@ -95,5 +95,5 @@ services:
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/disk3/DockerData/plex/lb_sync/config:/root/.config/letterboxd_stats:ro # directory containing config.toml
-      - /mnt/disk3/DockerData/plex/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file.
+      - /mnt/disk3/DockerData/lb_sync/config:/root/.config/letterboxd_stats:ro # directory containing config.toml
+      - /mnt/disk3/DockerData/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file.
