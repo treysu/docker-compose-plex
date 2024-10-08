@@ -14,7 +14,7 @@ The `compose.yaml` file includes the following services:
 
 - **Plex**: A media server to stream your media content.
 - **Kometa**: A service that works in conjunction with Plex, providing additional functionality.
-- **Plex Image Cleanup**: A tool to clean up Plex image cache.
+- **Imagemaid**: A tool from the Kometa team used to clean up Plex image cache.
 - **Letterboxd Sync**: A tool to sync Letterboxd data with Plex.
 
 ## Getting Started
