@@ -46,16 +46,10 @@ services:
       - /dev/dri:/dev/dri
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ~/Docker/container-data/plex/plexmediaserver:/config
-      - /mnt/MediaLibrary1:/library1:ro
-      - /mnt/MediaLibrary2:/library2:ro
+      - /mnt/disk3/DockerData/plexmediaserver:/config
+      - /media/library1/MediaLibrary1:/library1:ro
+      - /media/library2/MediaLibrary2:/library2:ro
     image: lscr.io/linuxserver/plex:latest
-    labels:
-      - homepage.group=Media
-      - homepage.name=Plex
-      - homepage.icon=plex.png
-      - homepage.href=http://plex.trey.lol/
-      - homepage.description=Plex server
 
   kometa:
     <<: [*general, *plexdependant]
@@ -66,7 +60,7 @@ services:
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ~/Docker/container-data/plex/kometa:/config:rw
+      - /mnt/disk3/DockerData/kometa:/config:rw
     image: kometateam/kometa
     env_file:
       - path: default.env
@@ -74,16 +68,16 @@ services:
       - path: kometa.env
         required: true
 
-  plex-image-cleanup:
+  imagemaid:
     <<: [*general, *plexdependant]
-    image: meisnate12/plex-image-cleanup
-    container_name: plex-image-cleanup
+    image: kometateam/imagemaid
+    container_name: imagemaid
     environment:
       <<: *media-grp
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - "~/Docker/container-data/plex/plex-image-cleanup/config:/config:rw"
-      - "~/Docker/container-data/plex/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
+      - "/mnt/disk3/DockerData/imagemaid/config:/config:rw"
+      - "/mnt/disk3/DockerData/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
 
   letterboxd_sync:
     <<: [*general, *plexdependant]
@@ -94,12 +88,12 @@ services:
     environment:
       <<: *media-grp
     env_file:
-      - path: ~/Docker/container-data/plex/lb_sync/debug.env
+      - path: /mnt/disk3/DockerData/lb_sync/debug.env
         required: false
       - path: default.env
         required: true
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ~/Docker/container-data/plex/lb_sync/config:/root/.config/letterboxd_stats:ro # directory containing config.toml
-      - ~/Docker/container-data/plex/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file.
+      - /mnt/disk3/DockerData/plex/lb_sync/config:/root/.config/letterboxd_stats:ro # directory containing config.toml
+      - /mnt/disk3/DockerData/plex/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file.
