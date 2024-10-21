@@ -77,7 +77,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /mnt/disk3/DockerData/imagemaid/config:/config:rw
-      - "/mnt/disk3/DockerData/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
+      - "~/Docker/container-data/plex/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
 
   letterboxd_sync:
     <<: [*general, *plexdependant]
