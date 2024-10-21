@@ -14,8 +14,8 @@ x-general: &general
       required: true
 
 x-media: &media-grp
-  PUID: 1001 # media
-  PGID: 1002 # mediagrp
+  PUID: 1002
+  PGID: 1002
 
 x-plexdependant: &plexdependant
   init: true
@@ -46,9 +46,9 @@ services:
       - /dev/dri:/dev/dri
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/disk3/DockerData/plexmediaserver:/config
-      - /media/library1/MediaLibrary1:/library1:ro
-      - /media/library2/MediaLibrary2:/library2:ro
+      - ~/Docker/container-data/plex/plexmediaserver:/config
+      - /mnt/MediaLibrary1:/library1:ro
+      - /mnt/MediaLibrary2:/library2:ro
     image: lscr.io/linuxserver/plex:latest
 
   kometa:
@@ -76,7 +76,7 @@ services:
       <<: *media-grp
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - "/mnt/disk3/DockerData/imagemaid/config:/config:rw"
+      - /mnt/disk3/DockerData/imagemaid/config:/config:rw
       - "/mnt/disk3/DockerData/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
 
   letterboxd_sync:
