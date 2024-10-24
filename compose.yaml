@@ -35,7 +35,7 @@ services:
     #ports:
     #  - "32400:32400" # access to the Plex Media Server
     #  - "1900:1900/udp" # access to the Plex DLNA Server
-    #  #- "5353:5353/udp" # older Bonjour/Avahi network discovery
+    #  - "5353:5353/udp" # older Bonjour/Avahi network discovery
     #  - "8324:8324/tcp" # controlling Plex for Roku via Plex Companion
     #  - "32410:32410/udp" # current GDM network discovery
     #  - "32412:32412/udp" # current GDM network discovery
@@ -50,6 +50,17 @@ services:
       - /mnt/MediaLibrary1:/library1:ro
       - /mnt/MediaLibrary2:/library2:ro
     image: lscr.io/linuxserver/plex:latest
+
+  tautulli:
+    <<: [*general, *plexdependant]
+    image: tautulli/tautulli
+    container_name: tautulli
+    volumes:
+      - ~/Docker/container-data/tautulli:/config
+    environment:
+      <<: *media-grp
+    ports:
+      - 8181:8181
 
   kometa:
     <<: [*general, *plexdependant]
@@ -79,21 +90,18 @@ services:
       - /mnt/disk3/DockerData/imagemaid/config:/config:rw
       - "~/Docker/container-data/plex/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
 
-  letterboxd_sync:
+  letterboxd-plex-sync:
     <<: [*general, *plexdependant]
-    container_name: letterboxd_sync
-    build: https://github.com/treysullivent/letterboxd-plex-sync.git
-    stdin_open: true
-    tty: true
+    container_name: letterboxd-plex-sync
+    image: treysu/letterboxd-plex-sync:latest
     environment:
       <<: *media-grp
     env_file:
-      - path: /mnt/disk3/DockerData/lb_sync/debug.env
-        required: false
+      - path: letterboxd.env
+        required: true
       - path: default.env
         required: true
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/disk3/DockerData/lb_sync/config:/root/.config/letterboxd_stats:ro # directory containing config.toml
       - /mnt/disk3/DockerData/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file.
