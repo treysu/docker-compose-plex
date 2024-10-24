@@ -4,14 +4,16 @@ x-general: &general
   labels:
     - autoheal=true
     - "com.centurylinklabs.watchtower.enable=true"
+  env_file:
+    - path: default.env
+      required: true
+
+x-healthcheck: &healthcheck
   healthcheck:
     test: curl google.com || exit 1
     interval: 30s
     timeout: 10s
     retries: 3
-  env_file:
-    - path: default.env
-      required: true
 
 x-media: &media-grp
   PUID: 1002
@@ -26,7 +28,7 @@ name: plex
 
 services:
   plex:
-    <<: [*general]
+    <<: [*general, *healthcheck]
     container_name: plex
     network_mode: host
     environment:
@@ -52,7 +54,7 @@ services:
     image: lscr.io/linuxserver/plex:latest
 
   tautulli:
-    <<: [*general, *plexdependant]
+    <<: [*general, *healthcheck, *plexdependant]
     image: tautulli/tautulli
     container_name: tautulli
     volumes:
@@ -63,7 +65,7 @@ services:
       - 8181:8181
 
   kometa:
-    <<: [*general, *plexdependant]
+    <<: [*general, *healthcheck, *plexdependant]
     container_name: kometa
     environment:
       <<: *media-grp
@@ -80,7 +82,7 @@ services:
         required: true
 
   imagemaid:
-    <<: [*general, *plexdependant]
+    <<: [*general, *healthcheck, *plexdependant]
     image: kometateam/imagemaid
     container_name: imagemaid
     environment:
@@ -104,4 +106,4 @@ services:
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/disk3/DockerData/lb_sync/resources:/app/resources:rw # optionally add in a resources folder to add a pre-generated lb to tmdb mapping CSV file.
+      - /mnt/disk3/DockerData/letterboxd-plex-sync/data:/app/data:rw # add in a data folder to store your lb to tmdb mapping CSV file.
