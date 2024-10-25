@@ -5,17 +5,19 @@ This repository contains Docker Compose configurations to set up and manage mult
 ## Repository Structure
 
 - **`compose.yaml`**: The main Docker Compose file that defines the services and their configurations.
-- **`kometa.env.example`**: A template environment file for the Kometa service. Copy this file to `kometa.env` and fill in your specific environment variables to configure the Kometa service properly.
-- **`.scripts/`**: Directory containing scripts for managing the Docker Compose services.
+- **`kometa.env.example`**: A template environment file for the Kometa service. Copy this file to `kometa.env` and fill in your specific environment variables to configure the service properly.
+- **`letterboxd.env.example`**: A template environment file for the Letterboxd Plex Sync service. Copy this file to `letterboxd.env` and fill in your specific environment variables to configure the service properly.
+
 
 ## Services
 
 The `compose.yaml` file includes the following services: 
 
 - **Plex**: A media server to stream your media content.
+- **Tautulli**: A tool for monitoring Plex server usage.
 - **Kometa**: A service that works in conjunction with Plex, providing additional functionality.
 - **Imagemaid**: A tool from the Kometa team used to clean up Plex image cache.
-- **Letterboxd Sync**: A tool to sync Letterboxd data with Plex.
+- **Letterboxd Plex Sync**: A tool to sync Letterboxd data with Plex.
 
 ## Getting Started
 
