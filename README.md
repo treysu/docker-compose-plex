@@ -30,16 +30,18 @@ The `compose.yaml` file includes the following services:
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/treysu/docker-compose-plex.git
+   cd docker-compose-plex
    ```
 
 2. **Configure Environment Files**:
    - Copy the example environment file for Kometa:
      ```sh
      cp kometa.env.example kometa.env
+     cp letterboxd.env.example letterboxd.env
+
      ```
-   - Open `kometa.env` and fill in the required values to configure the Kometa service properly.
+   - Open the `.env` files and fill in the required values to configure the Kometa service properly.
 
 3. **Run Docker Compose**:
    - To start all the services defined in the `compose.yaml` file, use:
@@ -56,13 +58,13 @@ The `compose.yaml` file includes the following services:
 ### Customization
 
 - **Modify Volumes and Paths**: Adjust the volumes and paths in `compose.yaml` to fit your environment and desired storage locations.
-- **Edit `kometa.env`**: Modify the environment variables specific to your Kometa setup as needed.
+- **Edit `*.env` Files**: Modify the environment variables specific to your setup as needed.
 
 ## Environment Variables
 
-The `kometa.env` file should contain necessary environment variables for the Kometa service to function correctly. These will be used in the Kometa config file.
+The `.env` files should contain all necessary environment variables for the related service to function correctly. 
 
-You should also add a `default.env` file that contains the timezome evnironment varaible: `TZ=America/Chicago`.
+You should also add a `default.env` file that contains the timezome evnironment varaible. (e.g `TZ=America/Chicago`)
 
 ## Health Check and Auto-Restart
 
@@ -73,7 +75,7 @@ The `compose.yaml` file includes configurations for health checks and auto-resta
 
 ## Troubleshooting
 
-- **Environment File Issues**: Ensure all required environment variables in `kometa.env` are properly set.
+- **Environment File Issues**: Ensure all required environment variables in the `.env` files are properly set.
 - **Permission Issues**: Ensure Docker has permission to access the volumes and directories specified in `compose.yaml`.
 - **Service Logs**: Check logs for individual services using:
   ```sh
