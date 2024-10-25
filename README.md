@@ -10,7 +10,7 @@ This repository contains Docker Compose configurations to set up and manage mult
 
 ## Services
 
-The `compose.yaml` file includes the following services:
+The `compose.yaml` file includes the following services: 
 
 - **Plex**: A media server to stream your media content.
 - **Kometa**: A service that works in conjunction with Plex, providing additional functionality.
