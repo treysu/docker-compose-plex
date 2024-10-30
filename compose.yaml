@@ -29,7 +29,7 @@ name: plex
 
 services:
   plex:
-    <<: [*general, *healthcheck]
+    <<: [*general]
     container_name: plex
     network_mode: host
     environment:
@@ -53,6 +53,12 @@ services:
       - /mnt/MediaLibrary1:/library1:ro
       - /mnt/MediaLibrary2:/library2:ro
     image: lscr.io/linuxserver/plex:latest
+    healthcheck:
+      test: curl --connect-timeout 15 --silent --show-error --fail http://localhost:32400/identity
+      interval: 1m00s
+      timeout: 15s
+      retries: 3
+      start_period: 1m00s
 
   tautulli:
     <<: [*general, *healthcheck, *plexdependant]
@@ -74,7 +80,8 @@ services:
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/disk3/DockerData/kometa:/config:rw
+      - ~/Docker/container-data/kometa:/config:rw
+      #- /mnt/disk3/DockerData/kometa:/config:rw
     image: kometateam/kometa
     env_file:
       - path: default.env
