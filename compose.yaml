@@ -49,7 +49,7 @@ services:
       - /dev/dri:/dev/dri
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ~/Docker/container-data/plex/plexmediaserver:/config
+      - /mnt/docker-data/plex/plexmediaserver:/config
       - /mnt/MediaLibrary1:/library1:ro
       - /mnt/MediaLibrary2:/library2:ro
     image: lscr.io/linuxserver/plex:latest
@@ -65,7 +65,7 @@ services:
     image: tautulli/tautulli
     container_name: tautulli
     volumes:
-      - ~/Docker/container-data/tautulli:/config
+      - /mnt/docker-data/tautulli:/config
     environment:
       <<: *media-grp
     ports:
@@ -80,8 +80,8 @@ services:
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ~/Docker/container-data/kometa:/config:rw
-      #- /mnt/disk3/DockerData/kometa:/config:rw
+      - /mnt/docker-data/kometa:/config:rw
+      #- /mnt/docker-data/kometa:/config:rw
     image: kometateam/kometa
     env_file:
       - path: default.env
@@ -97,8 +97,8 @@ services:
       <<: *media-grp
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/disk3/DockerData/imagemaid/config:/config:rw
-      - "~/Docker/container-data/plex/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
+      - /mnt/docker-data/imagemaid/config:/config:rw
+      - "/mnt/docker-data/plex/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
 
   letterboxd-plex-sync:
     <<: [*general, *plexdependant]
@@ -114,4 +114,4 @@ services:
 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/disk3/DockerData/letterboxd-plex-sync/data:/app/data:rw # add in a data folder to store your lb to tmdb mapping CSV file.
+      - /mnt/docker-data/letterboxd-plex-sync/data:/app/data:rw # add in a data folder to store your lb to tmdb mapping CSV file.
