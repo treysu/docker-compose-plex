@@ -45,11 +45,12 @@ services:
     #  - "32413:32413/udp" # current GDM network discovery
     #  - "32414:32414/udp" # current GDM network discovery
     #  - "32469:32469/tcp" # access to the Plex DLNA Server
-    devices:
-      - /dev/dri:/dev/dri
+    #devices:
+    #  - /dev/dri:/dev/dri
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/docker-data/plex/plexmediaserver:/config
+      - ~/docker-data/plex:/config
+      #- /mnt/docker-data/plex:/config
       - /mnt/MediaLibrary1:/library1:ro
       - /mnt/MediaLibrary2:/library2:ro
     image: lscr.io/linuxserver/plex:latest
@@ -65,23 +66,20 @@ services:
     image: tautulli/tautulli
     container_name: tautulli
     volumes:
-      - /mnt/docker-data/tautulli:/config
+      - ~/docker-data/tautulli:/config
     environment:
       <<: *media-grp
     ports:
       - 8181:8181
 
   kometa:
-    <<: [*general, *healthcheck, *plexdependant]
+    <<: [*general, *plexdependant]
     container_name: kometa
     environment:
       <<: *media-grp
-      #KOMETA_RUN: True
-
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/docker-data/kometa:/config:rw
-      #- /mnt/docker-data/kometa:/config:rw
+      - ~/docker-data/kometa:/config:rw
     image: kometateam/kometa
     env_file:
       - path: default.env
@@ -97,8 +95,8 @@ services:
       <<: *media-grp
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/docker-data/imagemaid/config:/config:rw
-      - "/mnt/docker-data/plex/plexmediaserver/Library/Application Support/Plex Media Server:/plex:rw"
+      - ~/docker-data/imagemaid/config:/config:rw
+      - "~/docker-data/plex/Library/Application Support/Plex Media Server:/plex:rw"
 
   letterboxd-plex-sync:
     <<: [*general, *plexdependant]
